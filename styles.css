@@ -92,54 +92,52 @@ a {
 
 .hero {
   position: relative;
-  min-height: 78vh;
-  display: grid;
-  align-items: center;
-  background:
-    radial-gradient(circle at 18% 20%, rgba(42, 165, 255, 0.48), transparent 40%),
-    radial-gradient(circle at 82% 76%, rgba(4, 50, 109, 0.4), transparent 45%),
-    linear-gradient(115deg, #072450 0%, #0c55aa 46%, #26a3fe 100%);
+  min-height: 76vh;
   overflow: hidden;
+  background: #041934;
 }
 
-.hero::before,
+.hero-carousel {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
 .hero::after {
   content: "";
   position: absolute;
-  border-radius: 999px;
-  filter: blur(3px);
-}
-
-.hero::before {
-  width: 380px;
-  height: 380px;
-  right: -60px;
-  top: -110px;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.hero::after {
-  width: 290px;
-  height: 290px;
-  left: -100px;
-  bottom: -80px;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.hero-overlay {
-  position: absolute;
   inset: 0;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.24;
+  background: linear-gradient(90deg, rgba(4, 20, 43, 0.7) 0%, rgba(4, 20, 43, 0.4) 36%, rgba(4, 20, 43, 0.2) 55%, rgba(4, 20, 43, 0.55) 100%);
+  z-index: 1;
 }
 
-.hero-content {
+.hero-overlay-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   color: var(--white);
-  padding: 56px 0;
+  min-height: 76vh;
+  display: grid;
+  align-content: center;
+  padding: 48px 0 88px;
 }
 
 .hero-kicker {
@@ -160,12 +158,37 @@ a {
   margin: 12px 0 26px;
   font-size: clamp(1.1rem, 3vw, 1.7rem);
   font-weight: 600;
+  max-width: 30ch;
 }
 
 .hero-cta {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+.hero-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+}
+
+.hero-dot.is-active {
+  background: #ffffff;
 }
 
 .btn {
@@ -350,9 +373,26 @@ a {
   margin: 0;
 }
 
-.quick-links {
+.social-icons {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.social-icons a {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
   display: grid;
-  gap: 6px;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.social-icons svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
 }
 
 .whatsapp-float {
@@ -412,6 +452,11 @@ a {
 
   .section {
     padding: 58px 0;
+  }
+
+  .hero,
+  .hero-overlay-content {
+    min-height: 62vh;
   }
 }
 
